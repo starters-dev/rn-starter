@@ -43,19 +43,6 @@ export const configureDesignSystem = (): void => {
   });
 };
 
-// export const getThemeColor = (c: keyof ThemeColors): Color => {
-//   const {ui} = stores;
-
-//   if (ui.isSystemAppearance) {
-//     return {
-//       dark: themes.dark[c],
-//       light: themes.light[c],
-//     };
-//   } else {
-//     return themes[ui.appearance][c];
-//   }
-// };
-
 export const getThemeStatusBarStyle = (ca?: CurrentAppearance): StatusBarStyle => {
   const {ui} = stores;
 
@@ -63,8 +50,6 @@ export const getThemeStatusBarStyle = (ca?: CurrentAppearance): StatusBarStyle =
     value: ui.appearance,
     system: ui.isSystemAppearance,
   };
-
-  console.log(current);
 
   const appearance = current.system ? Appearance.getColorScheme() : current.value;
   switch (appearance) {
@@ -83,14 +68,39 @@ export const getNavigationTheme = (ca?: CurrentAppearance): Theme => {
     system: ui.isSystemAppearance,
   };
 
-  console.log(current);
+  // for more information - https://reactnavigation.org/docs/themes
+  const MyDefaultTheme: Theme = {
+    dark: false,
+    colors: {
+      ...DefaultTheme.colors,
+      primary: Colors.primary,
+      background: Colors.bgColor,
+      card: Colors.bgColor,
+      text: Colors.textColor,
+      // border: Colors.grey30,
+      // notification: Colors.primary,
+    },
+  };
+
+  const MyDarkTheme: Theme = {
+    dark: true,
+    colors: {
+      ...DarkTheme.colors,
+      primary: Colors.primary,
+      background: Colors.bgColor,
+      card: Colors.bgColor,
+      text: Colors.textColor,
+      // border: Colors.grey30,
+      // notification: Colors.primary,
+    },
+  };
 
   const appearance = current.system ? Appearance.getColorScheme() : current.value;
   switch (appearance) {
     case 'dark':
-      return DarkTheme;
+      return MyDarkTheme;
     case 'light':
-      return DefaultTheme;
+      return MyDefaultTheme;
   }
 
   return DefaultTheme;
