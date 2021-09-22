@@ -2,6 +2,7 @@ package com.rnstarter;
 
 import com.facebook.react.ReactActivity;
 import android.os.Bundle;
+import android.content.res.Configuration;
 
 public class MainActivity extends ReactActivity {
 
@@ -18,5 +19,12 @@ public class MainActivity extends ReactActivity {
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(null);
+  }
+
+  // For Appearance API
+  @Override
+  public void onConfigurationChanged(Configuration newConfig) {
+    super.onConfigurationChanged(newConfig);
+    getReactInstanceManager().onConfigurationChanged(this, newConfig);
   }
 }
