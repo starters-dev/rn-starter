@@ -108,16 +108,23 @@ const Settings = () => {
   );
 };
 
+type TabScreenName = 'Main' | 'WIP' | 'Settings';
 type ScreenName = 'Main' | 'Example' | 'Settings';
 type Screen = {
   name: string;
   component: React.FC;
   options: () => NativeStackNavigationOptions;
 };
-type GenNavigatorProps = {
+type TabScreen = Screen & {
+  options: () => BottomTabNavigationOptions;
+};
+type GenStackNavigatorProps = {
   screens: Screen[];
 };
-const genNavigator = ({screens}: GenNavigatorProps) => {
+type GenTabNavigatorProps = {
+  screens: TabScreen[];
+};
+const genStackNavigator = ({screens}: GenStackNavigatorProps) => {
   const Stack = createNativeStackNavigator();
   return (
     <Stack.Navigator>
@@ -132,6 +139,20 @@ const genNavigator = ({screens}: GenNavigatorProps) => {
     </Stack.Navigator>
   );
 };
+const genTabNavigator = ({screens}: GenTabNavigatorProps) => {
+  const Tab = createBottomTabNavigator();
+  return (
+    <Tab.Navigator
+      screenOptions={({route}) => ({
+        ...tabBarDefaultOptions(route.name),
+      })}
+    >
+      {screens.map(it => (
+        <Tab.Screen key={it.name} name={it.name} component={it.component} options={it.options} />
+      ))}
+    </Tab.Navigator>
+  );
+};
 
 const screenDefaultOptions = (): NativeStackNavigationOptions => ({
   headerShadowVisible: false,
@@ -139,12 +160,29 @@ const screenDefaultOptions = (): NativeStackNavigationOptions => ({
   headerTintColor: Colors.primary,
 });
 
-const tabBarDefaultOptions = (): BottomTabNavigationOptions => ({
+const tabBarDefaultOptions = (routeName: string): BottomTabNavigationOptions => ({
   headerShown: false,
   tabBarActiveTintColor: Colors.primary,
-  tabBarInactiveTintColor: Colors.grey30,
+  tabBarInactiveTintColor: Colors.grey40,
   tabBarStyle: {backgroundColor: Colors.bgColor, borderTopWidth: 0, elevation: 0},
+  tabBarIcon: ({focused, color, size}) => (
+    <Icon name={getIconName(routeName, focused)} size={size} color={color} />
+  ),
 });
+
+const getIconName = (routeName: string, focused: boolean): string => {
+  if (routeName === 'MainNavigator') {
+    return focused ? 'newspaper' : 'newspaper-outline';
+  }
+  if (routeName === 'ExampleNavigator') {
+    return focused ? 'construct' : 'construct-outline';
+  }
+  if (routeName === 'SettingsNavigator') {
+    return focused ? 'cog' : 'cog-outline';
+  }
+
+  return 'list';
+};
 
 const screens: {[key in ScreenName]: Screen} = {
   Main: {
@@ -154,13 +192,6 @@ const screens: {[key in ScreenName]: Screen} = {
       title: 'Home',
     }),
   },
-  Settings: {
-    name: 'Settings',
-    component: Settings,
-    options: () => ({
-      title: 'Settings',
-    }),
-  },
   Example: {
     name: 'Example',
     component: Example,
@@ -168,42 +199,45 @@ const screens: {[key in ScreenName]: Screen} = {
       title: 'Example',
     }),
   },
+  Settings: {
+    name: 'Settings',
+    component: Settings,
+    options: () => ({
+      title: 'Settings',
+    }),
+  },
 };
 
-const HomeNavigator = () => genNavigator({screens: [screens.Main, screens.Example]});
-const ExampleNavigator = () => genNavigator({screens: [screens.Example]});
-const SettingsNavigator = () => genNavigator({screens: [screens.Settings]});
+const HomeStack = () => genStackNavigator({screens: [screens.Main, screens.Example]});
+const ExampleStack = () => genStackNavigator({screens: [screens.Example]});
+const SettingsStack = () => genStackNavigator({screens: [screens.Settings]});
 
-const getIconName = (routeName: string, focused: boolean): string => {
-  if (routeName === 'HomeNavigator') {
-    return focused ? 'newspaper' : 'newspaper-outline';
-  }
-  if (routeName === 'ExampleNavigator') {
-    return focused ? 'construct' : 'construct-outline';
-  }
-
-  return 'list';
+const tabScreens: {[key in TabScreenName]: TabScreen} = {
+  Main: {
+    name: 'MainNavigator',
+    component: HomeStack,
+    options: () => ({
+      title: 'Home',
+    }),
+  },
+  WIP: {
+    name: 'ExampleNavigator',
+    component: ExampleStack,
+    options: () => ({
+      title: 'WIP',
+    }),
+  },
+  Settings: {
+    name: 'SettingsNavigator',
+    component: SettingsStack,
+    options: () => ({
+      title: 'Settings',
+    }),
+  },
 };
 
-const Tab = createBottomTabNavigator();
-const MainNavigator = () => (
-  <Tab.Navigator
-    screenOptions={({route}) => ({
-      ...tabBarDefaultOptions(),
-      tabBarIcon: ({focused, color, size}) => (
-        <Icon name={getIconName(route.name, focused)} size={size} color={color} />
-      ),
-    })}
-  >
-    <Tab.Screen name="HomeNavigator" component={HomeNavigator} options={{title: 'Home'}} />
-    <Tab.Screen name="ExampleNavigator" component={ExampleNavigator} options={{title: 'Example'}} />
-    <Tab.Screen
-      name="SettingsNavigator"
-      component={SettingsNavigator}
-      options={{title: 'Settings'}}
-    />
-  </Tab.Navigator>
-);
+const MainNavigator = () =>
+  genTabNavigator({screens: [tabScreens.Main, tabScreens.WIP, tabScreens.Settings]});
 
 const AppNavigator = () => {
   const {ui} = useStores();
