@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {Alert, SafeAreaView, ScrollView, StatusBar, StyleSheet, useColorScheme} from 'react-native';
 import {Button, View, Text, Colors} from 'react-native-ui-lib';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -15,84 +15,56 @@ import {
   LearnMoreLinks,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
-
-const Section: React.FC<{
-  title: string;
-}> = ({children, title}) => {
-  const isDarkMode = useColorScheme() === 'dark';
-  return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}
-      >
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}
-      >
-        {children}
-      </Text>
-    </View>
-  );
-};
+import {Section} from './src/components/section';
+import {
+  configureDesignSystem,
+  getNavigationTheme,
+  getThemeStatusBarStyle,
+} from './src/utils/designSystem';
+import {hydrateStores, StoresProvider, useStores} from './src/stores';
 
 const Home = () => {
   const nav = useNavigation();
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const iconColor = isDarkMode ? Colors.lighter : Colors.darker;
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
 
   return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <ScrollView contentInsetAdjustmentBehavior="automatic" style={backgroundStyle}>
-        <Header />
+    <View flex bg-bgColor>
+      <SafeAreaView>
+        <ScrollView contentInsetAdjustmentBehavior="automatic">
+          <Header />
 
-        <View center>
-          <Icon name="infinite" size={30} color={iconColor} />
-        </View>
-
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}
-        >
           <View center>
-            <Button
-              marginV-s2
-              label="Open Example Screen"
-              onPress={() => nav.navigate('Example')}
-            />
+            <Icon name="infinite" size={30} color={Colors.primary} />
           </View>
 
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.tsx</Text> to change this screen and then come
-            back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">Read the docs to discover what to do next:</Section>
-          <LearnMoreLinks />
-        </View>
-      </ScrollView>
-    </SafeAreaView>
+          <View bg-bgColor>
+            <View center>
+              <Button
+                marginV-s2
+                label="Open Example Screen"
+                onPress={() => nav.navigate('Example')}
+              />
+            </View>
+
+            <Section title="Step One">
+              <Text textColor>
+                Edit <Text>App.tsx</Text> to change this screen and then come back to see your
+                edits.
+              </Text>
+            </Section>
+            <Section title="See Your Changes">
+              <ReloadInstructions />
+            </Section>
+            <Section title="Debug">
+              <DebugInstructions />
+            </Section>
+            <Section title="Learn More">
+              <Text>Read the docs to discover what to do next:</Text>
+            </Section>
+            <LearnMoreLinks />
+          </View>
+        </ScrollView>
+      </SafeAreaView>
+    </View>
   );
 };
 
@@ -100,14 +72,8 @@ const Example = () => {
   const nav = useNavigation();
   // const {nav, t} = useServices();
 
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-
   return (
-    <View flex bg-bgColor style={backgroundStyle}>
+    <View flex bg-bgColor>
       <ScrollView contentInsetAdjustmentBehavior="always">
         <View padding-s4>
           {/* <Section title={t.do('section.navigation.title')}> */}
@@ -134,7 +100,7 @@ const Example = () => {
             </View>
           </Section>
 
-          <Text black center>
+          <Text textColor center>
             localized with i18n-js
           </Text>
         </View>
@@ -143,7 +109,22 @@ const Example = () => {
   );
 };
 
-type ScreenName = 'Main' | 'Example';
+const Settings = () => {
+  return (
+    <View flex bg-bgColor>
+      <ScrollView contentInsetAdjustmentBehavior="always">
+        <View padding-s4>
+          {/* <Section title={t.do('section.navigation.title')}> */}
+          <Section title="Settings will be here">
+            <Text>Settings</Text>
+          </Section>
+        </View>
+      </ScrollView>
+    </View>
+  );
+};
+
+type ScreenName = 'Main' | 'Example' | 'Settings';
 type Screen = {
   name: string;
   component: React.FC;
@@ -178,7 +159,14 @@ const screens: {[key in ScreenName]: Screen} = {
       title: 'Home',
     },
   },
-
+  Settings: {
+    name: 'Settings',
+    component: Settings,
+    options: {
+      ...defaultOptions(),
+      title: 'Settings',
+    },
+  },
   Example: {
     name: 'Example',
     component: Example,
@@ -191,61 +179,77 @@ const screens: {[key in ScreenName]: Screen} = {
 
 const HomeNavigator = () => genNavigator({screens: [screens.Main, screens.Example]});
 const ExampleNavigator = () => genNavigator({screens: [screens.Example]});
+const SettingsNavigator = () => genNavigator({screens: [screens.Settings]});
+
+const getIconName = (routeName: string, focused: boolean): string => {
+  if (routeName === 'HomeNavigator') {
+    return focused ? 'newspaper' : 'newspaper-outline';
+  }
+  if (routeName === 'ExampleNavigator') {
+    return focused ? 'construct' : 'construct-outline';
+  }
+
+  return 'list';
+};
 
 const Tab = createBottomTabNavigator();
 const MainNavigator = () => (
   <Tab.Navigator
     screenOptions={({route}) => ({
       headerShown: false,
-      tabBarIcon: ({focused, color, size}) => {
-        const iconName = (() => {
-          if (route.name === 'HomeNavigator') {
-            return focused ? 'newspaper' : 'newspaper-outline';
-          }
-          if (route.name === 'ExampleNavigator') {
-            return focused ? 'construct' : 'construct-outline';
-          }
-
-          return 'list';
-        })();
-
-        // You can return any component that you like here!
-        return <Icon name={iconName} size={size} color={color} />;
-      },
+      tabBarIcon: ({focused, color, size}) => (
+        <Icon name={getIconName(route.name, focused)} size={size} color={color} />
+      ),
       tabBarActiveTintColor: Colors.primary,
       tabBarInactiveTintColor: Colors.grey30,
     })}
   >
     <Tab.Screen name="HomeNavigator" component={HomeNavigator} options={{title: 'Home'}} />
     <Tab.Screen name="ExampleNavigator" component={ExampleNavigator} options={{title: 'Example'}} />
+    <Tab.Screen
+      name="SettingsNavigator"
+      component={SettingsNavigator}
+      options={{title: 'Settings'}}
+    />
   </Tab.Navigator>
 );
 
-const App: React.FC = () => {
+const AppNavigator = () => {
+  const {ui} = useStores();
+
+  console.log(ui.isSystemAppearance);
+
   return (
-    <NavigationContainer>
-      <MainNavigator />
-    </NavigationContainer>
+    <>
+      <StatusBar barStyle={getThemeStatusBarStyle()} />
+      <NavigationContainer theme={getNavigationTheme()}>
+        <MainNavigator />
+      </NavigationContainer>
+    </>
   );
 };
 
-const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-});
+export default (): JSX.Element => {
+  useColorScheme();
+  const [ready, setReady] = useState(false);
 
-export default App;
+  const startApp = useCallback(async () => {
+    await hydrateStores();
+    configureDesignSystem();
+
+    setReady(true);
+  }, []);
+
+  useEffect(() => {
+    startApp();
+  }, [startApp]);
+
+  return !ready ? (
+    <View />
+  ) : (
+    <StoresProvider>
+      <AppNavigator />
+      {/* <Observer>{() => <AppNavigator />}</Observer> */}
+    </StoresProvider>
+  );
+};
