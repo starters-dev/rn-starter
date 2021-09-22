@@ -1,5 +1,5 @@
 import React, {useCallback, useEffect, useState} from 'react';
-import {Alert, SafeAreaView, ScrollView, StatusBar, StyleSheet, useColorScheme} from 'react-native';
+import {Alert, StatusBar, useColorScheme} from 'react-native';
 import {Button, View, Text, Colors} from 'react-native-ui-lib';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {NavigationContainer, useNavigation} from '@react-navigation/native';
@@ -8,6 +8,8 @@ import {
   NativeStackNavigationOptions,
 } from '@react-navigation/native-stack';
 import {BottomTabNavigationOptions, createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {ScrollView} from 'react-native-gesture-handler';
+import merge from 'lodash/merge';
 
 import {Section} from './src/components/section';
 import {
@@ -120,7 +122,12 @@ const genNavigator = ({screens}: GenNavigatorProps) => {
   return (
     <Stack.Navigator>
       {screens.map(it => (
-        <Stack.Screen key={it.name} name={it.name} component={it.component} options={it.options} />
+        <Stack.Screen
+          key={it.name}
+          name={it.name}
+          component={it.component}
+          options={merge(screenDefaultOptions(), it.options)}
+        />
       ))}
     </Stack.Navigator>
   );
@@ -144,7 +151,6 @@ const screens: {[key in ScreenName]: Screen} = {
     name: 'Home',
     component: Home,
     options: () => ({
-      ...screenDefaultOptions(),
       title: 'Home',
     }),
   },
@@ -152,7 +158,6 @@ const screens: {[key in ScreenName]: Screen} = {
     name: 'Settings',
     component: Settings,
     options: () => ({
-      ...screenDefaultOptions(),
       title: 'Settings',
     }),
   },
@@ -160,7 +165,6 @@ const screens: {[key in ScreenName]: Screen} = {
     name: 'Example',
     component: Example,
     options: () => ({
-      ...screenDefaultOptions(),
       title: 'Example',
     }),
   },
