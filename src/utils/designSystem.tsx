@@ -105,3 +105,14 @@ export const getNavigationTheme = (ca?: CurrentAppearance): Theme => {
 
   return DefaultTheme;
 };
+
+export const getHeaderBlurEffect = (ca?: CurrentAppearance): 'regular' | 'light' | 'dark' => {
+  const {ui} = stores;
+
+  const current: CurrentAppearance = ca ?? {
+    value: ui.appearance,
+    system: ui.isSystemAppearance,
+  };
+
+  return current.system ? 'regular' : current.value;
+};
