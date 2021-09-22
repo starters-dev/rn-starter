@@ -1,14 +1,8 @@
 import React from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
+import {SafeAreaView, ScrollView, StatusBar, StyleSheet, Text, useColorScheme} from 'react-native';
+import {View} from 'react-native-ui-lib';
 import Icon from 'react-native-vector-icons/Ionicons';
+import {NavigationContainer} from '@react-navigation/native';
 
 import {
   Colors,
@@ -48,9 +42,10 @@ const Section: React.FC<{
   );
 };
 
-const App = () => {
+const Home = () => {
   const isDarkMode = useColorScheme() === 'dark';
 
+  const iconColor = isDarkMode ? Colors.lighter : Colors.darker;
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
@@ -61,7 +56,9 @@ const App = () => {
       <ScrollView contentInsetAdjustmentBehavior="automatic" style={backgroundStyle}>
         <Header />
 
-        <Icon name="infinite" size={30} />
+        <View center>
+          <Icon name="infinite" size={30} color={iconColor} />
+        </View>
 
         <View
           style={{
@@ -83,6 +80,14 @@ const App = () => {
         </View>
       </ScrollView>
     </SafeAreaView>
+  );
+};
+
+const App = () => {
+  return (
+    <NavigationContainer>
+      <Home />
+    </NavigationContainer>
   );
 };
 
