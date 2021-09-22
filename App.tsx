@@ -7,14 +7,8 @@ import {
   createNativeStackNavigator,
   NativeStackNavigationOptions,
 } from '@react-navigation/native-stack';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {BottomTabNavigationOptions, createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
-import {
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
 import {Section} from './src/components/section';
 import {
   configureDesignSystem,
@@ -28,42 +22,30 @@ const Home = () => {
 
   return (
     <View flex bg-bgColor>
-      <SafeAreaView>
-        <ScrollView contentInsetAdjustmentBehavior="automatic">
-          <Header />
+      <ScrollView contentInsetAdjustmentBehavior="automatic">
+        <View center>
+          <Icon name="infinite" size={30} color={Colors.primary} />
+        </View>
 
+        <View bg-bgColor>
           <View center>
-            <Icon name="infinite" size={30} color={Colors.primary} />
+            <Button
+              marginV-s2
+              label="Open Example Screen"
+              onPress={() => nav.navigate('Example')}
+            />
           </View>
 
-          <View bg-bgColor>
-            <View center>
-              <Button
-                marginV-s2
-                label="Open Example Screen"
-                onPress={() => nav.navigate('Example')}
-              />
-            </View>
-
-            <Section title="Step One">
-              <Text textColor>
-                Edit <Text>App.tsx</Text> to change this screen and then come back to see your
-                edits.
-              </Text>
-            </Section>
-            <Section title="See Your Changes">
-              <ReloadInstructions />
-            </Section>
-            <Section title="Debug">
-              <DebugInstructions />
-            </Section>
-            <Section title="Learn More">
-              <Text>Read the docs to discover what to do next:</Text>
-            </Section>
-            <LearnMoreLinks />
-          </View>
-        </ScrollView>
-      </SafeAreaView>
+          <Section title="Step One">
+            <Text textColor>
+              Edit <Text>App.tsx</Text> to change this screen and then come back to see your edits.
+            </Text>
+          </Section>
+          <Section title="Learn More">
+            <Text textColor>Read the docs to discover what to do next:</Text>
+          </Section>
+        </View>
+      </ScrollView>
     </View>
   );
 };
@@ -128,7 +110,7 @@ type ScreenName = 'Main' | 'Example' | 'Settings';
 type Screen = {
   name: string;
   component: React.FC;
-  options: NativeStackNavigationOptions;
+  options: () => NativeStackNavigationOptions;
 };
 type GenNavigatorProps = {
   screens: Screen[];
@@ -144,36 +126,43 @@ const genNavigator = ({screens}: GenNavigatorProps) => {
   );
 };
 
-const defaultOptions = (): NativeStackNavigationOptions => ({
-  // headerStyle: {backgroundColor: 'white'},
+const screenDefaultOptions = (): NativeStackNavigationOptions => ({
+  headerShadowVisible: false,
   headerLargeTitle: true,
-  // headerTransparent: true,
+  headerTintColor: Colors.primary,
+});
+
+const tabBarDefaultOptions = (): BottomTabNavigationOptions => ({
+  headerShown: false,
+  tabBarActiveTintColor: Colors.primary,
+  tabBarInactiveTintColor: Colors.grey30,
+  tabBarStyle: {backgroundColor: Colors.bgColor, borderTopWidth: 0, elevation: 0},
 });
 
 const screens: {[key in ScreenName]: Screen} = {
   Main: {
     name: 'Home',
     component: Home,
-    options: {
-      ...defaultOptions(),
+    options: () => ({
+      ...screenDefaultOptions(),
       title: 'Home',
-    },
+    }),
   },
   Settings: {
     name: 'Settings',
     component: Settings,
-    options: {
-      ...defaultOptions(),
+    options: () => ({
+      ...screenDefaultOptions(),
       title: 'Settings',
-    },
+    }),
   },
   Example: {
     name: 'Example',
     component: Example,
-    options: {
-      ...defaultOptions(),
+    options: () => ({
+      ...screenDefaultOptions(),
       title: 'Example',
-    },
+    }),
   },
 };
 
@@ -196,12 +185,10 @@ const Tab = createBottomTabNavigator();
 const MainNavigator = () => (
   <Tab.Navigator
     screenOptions={({route}) => ({
-      headerShown: false,
+      ...tabBarDefaultOptions(),
       tabBarIcon: ({focused, color, size}) => (
         <Icon name={getIconName(route.name, focused)} size={size} color={color} />
       ),
-      tabBarActiveTintColor: Colors.primary,
-      tabBarInactiveTintColor: Colors.grey30,
     })}
   >
     <Tab.Screen name="HomeNavigator" component={HomeNavigator} options={{title: 'Home'}} />
@@ -249,7 +236,6 @@ export default (): JSX.Element => {
   ) : (
     <StoresProvider>
       <AppNavigator />
-      {/* <Observer>{() => <AppNavigator />}</Observer> */}
     </StoresProvider>
   );
 };
