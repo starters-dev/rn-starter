@@ -26,12 +26,7 @@ export class Nav implements IService {
     const prevName = this.r;
     const currentName = this.n.current?.getCurrentRoute()?.name;
 
-    if (
-      !!prevName &&
-      !!currentName // &&
-      // prevName !== currentName // &&
-      // currentName !== 'Main' // so we don't count Main screen
-    ) {
+    if (!!prevName && !!currentName) {
       const params = {to: currentName, from: prevName};
 
       // send some statistics
