@@ -1,18 +1,22 @@
 import React, {useCallback, useEffect, useState} from 'react';
-import {StatusBar, useColorScheme} from 'react-native';
+import {LogBox, StatusBar, useColorScheme} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 
-import {MainNavigator} from './src/screens';
+import {RootNavigator} from './src/screens';
 import {
   configureDesignSystem,
   getNavigationTheme,
   getThemeStatusBarStyle,
 } from './src/utils/designSystem';
 import {hydrateStores, StoresProvider, useStores} from './src/stores';
-import {initServices} from './src/services';
+import {initServices, useServices} from './src/services';
+
+LogBox.ignoreLogs(['EventEmitter.removeListener', '`new NativeEventEmitter()`']);
 
 const AppNavigator = () => {
-  useColorScheme(); // needs to be here to correctly change tab bar appearance
+  useColorScheme();
+
+  const {nav} = useServices();
   const {ui} = useStores();
 
   console.log('isSystemAppearance', ui.isSystemAppearance);
@@ -20,8 +24,13 @@ const AppNavigator = () => {
   return (
     <>
       <StatusBar barStyle={getThemeStatusBarStyle()} />
-      <NavigationContainer theme={getNavigationTheme()}>
-        <MainNavigator />
+      <NavigationContainer
+        ref={nav.n}
+        onReady={nav.onReady}
+        onStateChange={nav.onStateChange}
+        theme={getNavigationTheme()}
+      >
+        <RootNavigator />
       </NavigationContainer>
     </>
   );
@@ -32,8 +41,8 @@ export default (): JSX.Element => {
 
   const startApp = useCallback(async () => {
     await hydrateStores();
-    configureDesignSystem();
     await initServices();
+    configureDesignSystem();
 
     setReady(true);
   }, []);
