@@ -8,7 +8,14 @@ For more information, check out [Why](#why) section.
 
 #### Quick start with [cli-rn](https://github.com/kanzitelli/cli-rn)
 
-Coming soon...
+```bash
+> npm i -g cli-rn
+> cli-rn new AppName -n rn
+```
+
+If you encounter any problems with `cli-rn`, please open an issue [here](https://github.com/kanzitelli/cli-rn/issues).
+
+If you have any troubles running the app with `yarn ios` or `yarn android`, open XCode or Android Studio and run the project from there.
 
 #### Manual setup
 
