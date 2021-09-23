@@ -4,6 +4,11 @@ import com.facebook.react.ReactActivity;
 import android.os.Bundle;
 import android.content.res.Configuration;
 
+// RNGH
+import com.facebook.react.ReactActivityDelegate;
+import com.facebook.react.ReactRootView;
+import com.swmansion.gesturehandler.react.RNGestureHandlerEnabledRootView;
+
 public class MainActivity extends ReactActivity {
 
   /**
@@ -26,5 +31,16 @@ public class MainActivity extends ReactActivity {
   public void onConfigurationChanged(Configuration newConfig) {
     super.onConfigurationChanged(newConfig);
     getReactInstanceManager().onConfigurationChanged(this, newConfig);
+  }
+
+  // For RNGH
+  @Override
+  protected ReactActivityDelegate createReactActivityDelegate() {
+    return new ReactActivityDelegate(this, getMainComponentName()) {
+      @Override
+      protected ReactRootView createRootView() {
+       return new RNGestureHandlerEnabledRootView(MainActivity.this);
+      }
+    };
   }
 }
