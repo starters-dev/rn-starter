@@ -1,40 +1,9 @@
 import React, {useCallback, useEffect, useState} from 'react';
-import {LogBox, StatusBar, useColorScheme} from 'react-native';
-import {NavigationContainer} from '@react-navigation/native';
 
-import {RootNavigator} from './src/screens';
-import {
-  configureDesignSystem,
-  getNavigationTheme,
-  getThemeStatusBarStyle,
-} from './src/utils/designSystem';
-import {hydrateStores, StoresProvider, useStores} from './src/stores';
-import {initServices, useServices} from './src/services';
-
-LogBox.ignoreLogs(['EventEmitter.removeListener', '`new NativeEventEmitter()`']);
-
-const AppNavigator = () => {
-  useColorScheme();
-
-  const {nav} = useServices();
-  const {ui} = useStores();
-
-  console.log('isSystemAppearance', ui.isSystemAppearance);
-
-  return (
-    <>
-      <StatusBar barStyle={getThemeStatusBarStyle()} />
-      <NavigationContainer
-        ref={nav.n}
-        onReady={nav.onReady}
-        onStateChange={nav.onStateChange}
-        theme={getNavigationTheme()}
-      >
-        <RootNavigator />
-      </NavigationContainer>
-    </>
-  );
-};
+import {AppNavigator} from './src/app';
+import {configureDesignSystem} from './src/utils/designSystem';
+import {hydrateStores, StoresProvider} from './src/stores';
+import {initServices} from './src/services';
 
 export default (): JSX.Element => {
   const [ready, setReady] = useState(false);
@@ -50,7 +19,6 @@ export default (): JSX.Element => {
   useEffect(() => {
     startApp();
   }, [startApp]);
-  console.log('huy');
 
   return (
     <StoresProvider>
