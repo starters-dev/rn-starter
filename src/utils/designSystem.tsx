@@ -116,3 +116,15 @@ export const getHeaderBlurEffect = (ca?: CurrentAppearance): 'regular' | 'light'
 
   return current.system ? 'regular' : current.value;
 };
+
+export const getHeaderBGColor = (ca?: CurrentAppearance): string => {
+  const {ui} = stores;
+
+  const current: CurrentAppearance = ca ?? {
+    value: ui.appearance,
+    system: ui.isSystemAppearance,
+  };
+
+  const appearance = current.system ? Appearance.getColorScheme() : current.value;
+  return appearance ? themes[appearance].bgColor : Colors.bgColor;
+};
