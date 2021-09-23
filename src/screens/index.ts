@@ -6,7 +6,7 @@ import {Example} from './screen-sample';
 import {genRootNavigator, genStackNavigator, genTabNavigator} from '../services/navigation/help';
 
 // Describe your screens here
-export type TabScreen = 'Main' | 'WIP' | 'Settings';
+export type Tabs = 'Main' | 'WIP' | 'Settings';
 export type Modal = 'ExampleModal';
 export type Screen = 'Main' | 'Example' | 'Settings';
 
@@ -22,7 +22,7 @@ export type ScreenProps = {
 // Screens
 const screens: ScreenLayouts = {
   Main: {
-    name: 'Home',
+    name: 'Main',
     component: Main,
     options: () => ({
       title: 'Home',
@@ -43,13 +43,13 @@ const screens: ScreenLayouts = {
     }),
   },
 };
-const HomeStack = () => genStackNavigator({screens: [screens.Main, screens.Example]});
-const ExampleStack = () => genStackNavigator({screens: [screens.Example]});
-const SettingsStack = () => genStackNavigator({screens: [screens.Settings]});
-const ExampleModalStack = () => genStackNavigator({screens: [screens.Main, screens.Example]});
+const HomeStack = () => genStackNavigator([screens.Main, screens.Example]);
+const ExampleStack = () => genStackNavigator([screens.Example]);
+const SettingsStack = () => genStackNavigator([screens.Settings]);
+const ExampleModalStack = () => genStackNavigator([screens.Main, screens.Example]);
 
 // Tabs
-const tabScreens: TabScreenLayouts = {
+const tabs: TabScreenLayouts = {
   Main: {
     name: 'MainNavigator',
     component: HomeStack,
@@ -72,8 +72,7 @@ const tabScreens: TabScreenLayouts = {
     }),
   },
 };
-const TabNavigator = (): JSX.Element =>
-  genTabNavigator({screens: [tabScreens.Main, tabScreens.WIP, tabScreens.Settings]});
+const TabNavigator = () => genTabNavigator([tabs.Main, tabs.WIP, tabs.Settings]);
 
 // Modals
 const modals: ModalScreenLayouts = {

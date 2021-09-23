@@ -1,7 +1,7 @@
 import {BottomTabNavigationOptions} from '@react-navigation/bottom-tabs';
 import {NativeStackNavigationOptions} from '@react-navigation/native-stack';
 
-import {Modal, Screen, TabScreen} from '../../screens';
+import {Modal, Screen, Tabs} from '../../screens';
 
 type ScreenInfo = {
   name: string;
@@ -13,19 +13,15 @@ type ScreenInfo = {
 export type ScreenLayouts = {
   [key in Screen]: ScreenInfo;
 };
-export type GenStackNavigatorProps = {
-  screens: ScreenInfo[];
-};
+export type GenStackNavigatorProps = ScreenInfo[];
 
 export type TabScreenInfo = ScreenInfo & {
   options: () => BottomTabNavigationOptions;
 };
 export type TabScreenLayouts = {
-  [key in TabScreen]: TabScreenInfo;
+  [key in Tabs]: TabScreenInfo;
 };
-export type GenTabNavigatorProps = {
-  screens: TabScreenInfo[];
-};
+export type GenTabNavigatorProps = TabScreenInfo[];
 
 export type ModalScreenInfo = ScreenInfo;
 export type ModalScreenLayouts = {

@@ -7,7 +7,7 @@ import {screenDefaultOptions, tabBarDefaultOptions} from './options';
 import {GenStackNavigatorProps, GenTabNavigatorProps, ModalScreenInfo} from './types';
 import {useColorScheme} from 'react-native';
 
-export const genStackNavigator = ({screens}: GenStackNavigatorProps): JSX.Element => {
+export const genStackNavigator = (screens: GenStackNavigatorProps): JSX.Element => {
   const Stack = createNativeStackNavigator();
   const stackScreens = screens.map(it => (
     <Stack.Screen
@@ -21,7 +21,7 @@ export const genStackNavigator = ({screens}: GenStackNavigatorProps): JSX.Elemen
   return <Stack.Navigator>{stackScreens}</Stack.Navigator>;
 };
 
-export const genTabNavigator = ({screens}: GenTabNavigatorProps): JSX.Element => {
+export const genTabNavigator = (screens: GenTabNavigatorProps): JSX.Element => {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   useColorScheme(); // needs to be here to correctly change tab bar appearance
 
