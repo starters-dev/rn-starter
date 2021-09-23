@@ -1,4 +1,4 @@
-import {DevSettings} from 'react-native';
+import RNRestart from 'react-native-restart';
 import {makeAutoObservable} from 'mobx';
 import {hydrateStore, makePersistable} from 'mobx-persist-store';
 
@@ -16,7 +16,7 @@ export class UI implements IStore {
     this.isSystemAppearance = v === 'System';
     this.appearance = this.appearanceFromUIToInternal(v);
 
-    DevSettings.reload();
+    RNRestart.Restart();
   };
   get appearanceName(): UIAppearance {
     return this.isSystemAppearance ? 'System' : this.appearanceFromInternalToUI(this.appearance);
@@ -34,7 +34,7 @@ export class UI implements IStore {
     this.isSystemLanguage = v === 'System';
     this.language = this.languageFromUIToInternal(v);
 
-    DevSettings.reload();
+    RNRestart.Restart();
   };
   get languageName(): UILanguage {
     return this.isSystemLanguage ? 'System' : this.languageFromInternalToUI(this.language);
