@@ -1,3 +1,5 @@
+https://user-images.githubusercontent.com/4402166/134559538-a2801d52-7b8a-44a6-b12a-0cc1eafbb82b.MP4
+
 This starter is a collection of libraries and approaches from my personal experience. No hard judgements ✌️
 
 For more information, check out [Why](#why) section.
@@ -146,14 +148,14 @@ There are still some things I would like to add to the starter:
 - [x] Passing props to a screen example
 - [x] Constants: add Dimensions
 - [x] MMKV (AsyncStorage) stores persisting example
-- [ ] Shared transitions - [IjzerenHein/react-navigation-shared-element](https://github.com/IjzerenHein/react-navigation-shared-element)
+- [ ] Shared transitions — [IjzerenHein/react-navigation-shared-element](https://github.com/IjzerenHein/react-navigation-shared-element)
 
 #### Production
 
 - [ ] Auth flow
-- [ ] Fast Image - [DylanVann/react-native-fast-image](https://github.com/DylanVann/react-native-fast-image)
+- [ ] Fast Image — [DylanVann/react-native-fast-image](https://github.com/DylanVann/react-native-fast-image)
 - [ ] Notifications — [wix/react-native-notifications](https://github.com/wix/react-native-notifications)
-- [ ] E2E tests - [wix/Detox](https://github.com/wix/Detox)
+- [ ] E2E tests — [wix/Detox](https://github.com/wix/Detox)
 - [ ] Permissions — [zoontek/react-native-permissions](https://github.com/zoontek/react-native-permissions)
 - [ ] FB SDK — [thebergamo/react-native-fbsdk-next](https://github.com/thebergamo/react-native-fbsdk-next)
 - [ ] Appodeal — [appodeal/react-native-appodeal](https://github.com/appodeal/react-native-appodeal)
