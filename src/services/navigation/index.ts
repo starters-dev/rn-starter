@@ -1,126 +1,71 @@
 // import {Constants, Navigation, NavigationConstants, Options} from 'react-native-navigation';
-import {gestureHandlerRootHOC as withGestureHandler} from 'react-native-gesture-handler';
-import pipe from 'lodash/flowRight';
+import React from 'react';
+import RNRestart from 'react-native-restart';
 
-// import {Screen, screens, screensLayouts} from '../../screens';
-// import {withStores} from '../../stores';
-import {services} from '../../services';
-import {configureDesignSystem} from '../../utils/designSystem';
-import {Screen} from '../../screens';
-
-// import {BottomTabs, Component, Root, Stack} from './layout';
-// import {navDefaultOptions} from './options';
+import {ModalProps, ScreenProps} from '../../screens';
+import {CommonActions, NavigationContainerRef, StackActions} from '@react-navigation/native';
 
 export class Nav implements IService {
   private inited = false;
-  // private N = Navigation;
-  // nav constants always updated on willAppear event
-  // C: NavigationConstants = Constants.getSync();
+
+  n: React.RefObject<NavigationContainerRef<ScreenProps>> = React.createRef();
+  r: string | undefined;
 
   init = async (): PVoid => {
     if (!this.inited) {
-      await this.registerScreens();
-      this.setDefaultOptions();
-      this.registerListeners();
-
       this.inited = true;
     }
   };
 
-  // Start different apps' logic
-  start = async (appType: AppType = 'three_tabs'): PVoid => {
-    if (appType === 'one_screen') {
-      await this.startOneScreenApp();
+  // on init methods
+  onReady = (): void => {
+    this.r = this.n.current?.getCurrentRoute()?.name;
+  };
+
+  onStateChange = (): void => {
+    const prevName = this.r;
+    const currentName = this.n.current?.getCurrentRoute()?.name;
+
+    if (
+      !!prevName &&
+      !!currentName // &&
+      // prevName !== currentName // &&
+      // currentName !== 'Main' // so we don't count Main screen
+    ) {
+      const params = {to: currentName, from: prevName};
+
+      // send some statistics
+      // facebook.event('ScreenOpen', params);
+      // yandex.event('ScreenOpen', params);
+      console.log('onStateChange:', JSON.stringify(params, null, 2));
     }
-    if (appType === 'three_tabs') {
-      await this.startThreeTabsApp();
-    }
 
-    await this.getConstants(); // needs to be called after setRoot()
+    this.r = currentName;
   };
 
-  restart = async (): PVoid => {
-    this.setDefaultOptions(); // settings navigation options
-    configureDesignSystem(); // configuring design system with updated appearance
-    services.t.setup(); // setting up new language for translation service
-
-    await this.start('three_tabs');
-  };
-
-  private startOneScreenApp = async (): PVoid => {
-    // await Navigation.setRoot(Root(Stack(Component(screensLayouts.Main))));
-  };
-
-  private startThreeTabsApp = async (): PVoid => {
-    // await Navigation.setRoot(
-    //   Root(
-    //     BottomTabs([
-    //       Stack(Component(screensLayouts.Main)),
-    //       Stack(Component(screensLayouts.Example)),
-    //       Stack(Component(screensLayouts.Settings)),
-    //     ]),
-    //   ),
-    // );
+  restart = (): void => {
+    RNRestart.Restart();
   };
 
   // Navigation methods
-  push = async <T>(cId: string, name: Screen, passProps?: T, options?: any): PVoid => {
-    // const sl = screensLayouts[name];
-    // await this.N.push(
-    //   cId,
-    //   Component({
-    //     ...sl,
-    //     passProps,
-    //     options: {
-    //       ...sl.options,
-    //       ...options,
-    //     },
-    //   }),
-    // );
+  push = <T extends keyof ScreenProps>(name: T, passProps?: ScreenProps[T]): void => {
+    this.n.current?.dispatch(StackActions.push(name, passProps));
   };
 
-  pop = async (cId: string): PVoid => {
-    // this.N.pop(cId);
+  pop = (): void => {
+    this.n.current?.goBack();
   };
 
-  show = async <T>(name: Screen, passProps?: T, options?: any): PVoid => {
-    // const sl = screensLayouts[name];
-    // this.N.showModal(
-    //   Stack(
-    //     Component({
-    //       ...sl,
-    //       passProps,
-    //       options: {
-    //         ...sl.options,
-    //         ...options,
-    //       },
-    //     }),
-    //   ),
-    // );
+  show = <T extends keyof ModalProps>(name: T, passProps?: ScreenProps[T]): void => {
+    this.navigate(name, passProps);
   };
 
-  private setDefaultOptions = (): void => {
-    // this.N.setDefaultOptions(navDefaultOptions());
-  };
-
-  // System methods
-  private registerScreens = async () => {
-    // screens.forEach(s =>
-    //   this.N.registerComponent(
-    //     s.name,
-    //     pipe(withGestureHandler, withStores, withServices, () => s.component),
-    //     () => s.component,
-    //   ),
-    // );
-  };
-
-  private registerListeners = () => {
-    // this.N.events().registerComponentWillAppearListener(() => {
-    //   this.getConstants();
-    // });
-  };
-
-  private getConstants = async () => {
-    // this.C = Constants.getSync();
+  private navigate = <T extends keyof ScreenProps>(name: T, passProps?: ScreenProps[T]): void => {
+    this.n.current?.dispatch(
+      CommonActions.navigate({
+        name,
+        params: passProps,
+      }),
+    );
   };
 }

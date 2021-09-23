@@ -2,7 +2,9 @@ import React from 'react';
 import {Alert, ScrollView} from 'react-native';
 import {View, Button, Text} from 'react-native-ui-lib';
 import {observer} from 'mobx-react';
+import {NativeStackScreenProps} from '@react-navigation/native-stack';
 
+import {ScreenProps} from '.';
 import {useServices} from '../services';
 // import { useStores } from '../stores';
 // import { useConstants } from '../utils/constants';
@@ -11,7 +13,10 @@ import {Section} from '../components/section';
 import {randomNum} from '../utils/help';
 import {Reanimated2} from '../components/reanimated2';
 
-export const Example: React.FC<ExampleScreenProps> = observer(({value}) => {
+type Props = NativeStackScreenProps<ScreenProps, 'Example'>;
+
+export const Example: React.FC<Props> = observer(({route}) => {
+  const {value} = route.params ?? {value: randomNum()};
   const {nav, t} = useServices();
   // const {} = useStores();
   // const {} = useConstants();
@@ -25,36 +30,29 @@ export const Example: React.FC<ExampleScreenProps> = observer(({value}) => {
               <Button
                 marginV-s1
                 label={t.do('section.navigation.button.push')}
-                // onPress={() => nav.push(componentId, 'Example')}
-                onPress={() => Alert.alert('push')}
+                onPress={() => nav.push('Example', {value: randomNum()})}
               />
               <Button
                 marginV-s1
                 label={t.do('section.navigation.button.show')}
-                onPress={() => nav.show('Example')}
+                onPress={() => nav.show('ExampleModal')}
               />
               <Button
                 marginV-s1
-                label={t.do('section.navigation.button.passProps')}
-                // onPress={() =>
-                //   nav.push<ExampleScreenProps>(componentId, 'Example', {value: randomNum()})
-                // }
-                onPress={() => Alert.alert('pass props')}
+                label={t.do('section.navigation.button.sharedTransition')}
+                onPress={() => Alert.alert('future feature: shared transition')}
               />
             </View>
 
-            <Text textColor center text50R>
-              Pass prop: {value}
-            </Text>
+            {!value ? null : (
+              <Text textColor center text50R>
+                Pass prop: {value}
+              </Text>
+            )}
           </Section>
 
           <Reanimated2 stID="reanimated2" />
-          <Button
-            marginV-s1
-            label={t.do('section.navigation.button.back')}
-            // onPress={() => nav.pop(componentId)}
-            onPress={() => Alert.alert('go back')}
-          />
+          <Button marginV-s1 label={t.do('section.navigation.button.back')} onPress={nav.pop} />
 
           <Text textColor center>
             localized with i18n-js

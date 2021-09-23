@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect} from 'react';
+import React, {useCallback} from 'react';
 import {ScrollView, Alert} from 'react-native';
 import {View, Button, Text} from 'react-native-ui-lib';
 import {observer} from 'mobx-react';
@@ -9,6 +9,7 @@ import {useStores} from '../stores';
 import {Section} from '../components/section';
 import {Reanimated2} from '../components/reanimated2';
 import {randomNum} from '../utils/help';
+import {useFocusEffect} from '@react-navigation/core';
 
 export const Main: React.FC = observer(({}) => {
   const {nav, t, api} = useServices();
@@ -26,9 +27,11 @@ export const Main: React.FC = observer(({}) => {
     }
   }, [api.counter]);
 
-  useEffect(() => {
-    start();
-  }, [start]);
+  useFocusEffect(
+    useCallback(() => {
+      start();
+    }, [start]),
+  );
 
   return (
     <View flex bg-bgColor>
@@ -38,34 +41,17 @@ export const Main: React.FC = observer(({}) => {
             <Button
               marginV-s1
               label={t.do('section.navigation.button.push')}
-              // onPress={() => nav.push(componentId, 'Example')}
-              onPress={() => Alert.alert('push')}
+              onPress={() => nav.push('Example', {value: randomNum()})}
             />
             <Button
               marginV-s1
               label={t.do('section.navigation.button.show')}
-              onPress={() => nav.show('Example')}
-            />
-            <Button
-              marginV-s1
-              label={t.do('section.navigation.button.passProps')}
-              // onPress={() =>
-              // nav.push<ExampleScreenProps>(componentId, 'Example', {value: randomNum()})
-              // }
-              onPress={() => Alert.alert('pass props')}
+              onPress={() => nav.show('ExampleModal')}
             />
             <Button
               marginV-s1
               label={t.do('section.navigation.button.sharedTransition')}
-              onPress={() => Alert.alert('shared transition')}
-              // onPress={() =>
-              //   nav.push<ExampleScreenProps>(
-              //     componentId,
-              //     'Example',
-              //     {value: randomNum()},
-              //     withSharedTransitions([{id: 'reanimated2', pop: true}]),
-              //   )
-              // }
+              onPress={() => Alert.alert('future feature: shared transition')}
             />
           </Section>
 
