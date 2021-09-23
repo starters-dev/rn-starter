@@ -46,7 +46,7 @@ If you need to rename the app, do the following (based on [react-native-rename](
 
 ## What's inside
 
-- [React Navigation](https://github.com/react-navigation/react-navigation) - routing and navigation for React Native apps. If you'd like to use [React Native Navigation](https://github.com/wix/react-native-navigation) by Wix, check out [rnn-starter](https://github.com/kanzitelli/rnn-starter).
+- [React Navigation (v6)](https://github.com/react-navigation/react-navigation) - routing and navigation for React Native apps. If you'd like to use [React Native Navigation](https://github.com/wix/react-native-navigation) by Wix, check out [rnn-starter](https://github.com/kanzitelli/rnn-starter).
 - [RN UI lib](https://github.com/wix/react-native-ui-lib) - amazing Design System, UI toolset & components library for React Native. Dark Mode is implemented using this library.
 - [Reanimated 2](https://github.com/software-mansion/react-native-reanimated) - React Native's Animated library reimplemented.
 - [MobX](https://github.com/mobxjs/mobx) - simple, scalable state management, with [mobx-persist-store](https://github.com/quarrant/mobx-persist-store) for persisting your stores.
@@ -145,8 +145,8 @@ There are still some things I would like to add to the starter:
 
 - [x] Passing props to a screen example
 - [x] Constants: add Dimensions
-- [x] AsyncStorage stores persisting example
-- [ ] Shared transitions example
+- [x] MMKV (AsyncStorage) stores persisting example
+- [ ] Shared transitions - [IjzerenHein/react-navigation-shared-element](https://github.com/IjzerenHein/react-navigation-shared-element)
 
 #### Production
 
@@ -163,7 +163,7 @@ Feel free to open an issue for suggestions.
 
 ## Known issues (warnings)
 
-- _Large title is not shown on 2nd+ tab_. This [issue](https://github.com/software-mansion/react-native-screens/issues/649) exists and there is a [patch](https://github.com/software-mansion/react-native-screens/issues/649#issuecomment-727553714) for fixing it. You can find it in `patches/react-native+0.65.1.patch`. It will be autorun when you do `yarn add/remove/etc`.
+- _Large title is not shown on 2nd+ tab_. This [issue](https://github.com/software-mansion/react-native-screens/issues/649) exists. So you can find the patch file for fixing that in `patches/react-native+0.65.1.patch`. It will be autorun when you do `yarn add/remove/etc`.
 - _Over-The-Air Updates_. They have been removed from the current version as I had some problems publishing one of the apps to AppStore. Check out [my tweet](https://twitter.com/kanzitelli/status/1398229619862642692) and be aware of the issue if you'd like to use them anyways.
 
 ## Worth checking
