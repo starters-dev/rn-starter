@@ -1,6 +1,7 @@
 import React from 'react';
 import {View, Text} from 'react-native-ui-lib';
 import Animated, {withSpring, useAnimatedStyle, useSharedValue} from 'react-native-reanimated';
+import {SharedElement} from 'react-navigation-shared-element';
 
 import {Bounceable} from './bounceable';
 
@@ -20,16 +21,18 @@ export const Reanimated2: React.FC<Reanimated2Props> = ({stID}: Reanimated2Props
   };
 
   return (
-    <View padding-s1>
-      <Animated.View style={[animatedStyles]}>
-        <View center padding-s1>
-          <Bounceable onPress={moveObject} activeScale={0.9}>
-            <View center bg-primary padding-s8 br40>
-              <Text whitish>Bounceable</Text>
-            </View>
-          </Bounceable>
-        </View>
-      </Animated.View>
-    </View>
+    <SharedElement id={stID ?? ''}>
+      <View padding-s1>
+        <Animated.View style={[animatedStyles]}>
+          <View center padding-s1>
+            <Bounceable onPress={moveObject} activeScale={0.9}>
+              <View center bg-primary padding-s8 br40>
+                <Text whitish>Bounceable</Text>
+              </View>
+            </Bounceable>
+          </View>
+        </Animated.View>
+      </View>
+    </SharedElement>
   );
 };
