@@ -56,7 +56,7 @@ export const Main: React.FC = observer(({}) => {
           </Section>
 
           <Section title="Reanimated 2">
-            <Reanimated2 stID="reanimated2" />
+            <Reanimated2 />
           </Section>
 
           <Section title="MobX">
