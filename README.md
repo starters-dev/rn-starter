@@ -144,7 +144,15 @@ const Screen = ({componentId}) => {
 
 #### Samples for new screens, services, stores and components.
 
-So you have one structure within the project. You can find them in corresponding folders. Just copy&paste it and make the necessary changes.
+So you have one structure within the project. You can find them in corresponding folders. Just copy&paste it and make the necessary changes. I think, it would be good to have it in [cli-rn](https://github.com/kanzitelli/cli-rn) to be automatically generated, so won't be need even for copy&paste.
+
+```bash
+# Future feature
+> cli-rn generate (screen|service|store|component) --name SName # maybe something else
+> cli-rn g (sc|se|st|co) -n SName # short version
+```
+
+####
 
 ## Enhancements
 
@@ -155,7 +163,7 @@ There are still some things I would like to add to the starter:
 - [x] Passing props to a screen example
 - [x] Constants: add Dimensions
 - [x] MMKV (AsyncStorage) stores persisting example
-- [ ] Shared transitions — [IjzerenHein/react-navigation-shared-element](https://github.com/IjzerenHein/react-navigation-shared-element)
+- [ WIP ] Shared transitions — [IjzerenHein/react-navigation-shared-element](https://github.com/IjzerenHein/react-navigation-shared-element)
 
 #### Production
 
@@ -182,7 +190,7 @@ Feel free to open an issue for suggestions.
 - Expo + React Native Navigation? Yes! - [Medium](https://kanzitelli.medium.com/expo-react-native-navigation-yes-ebda0cbfa4b1), [Dev.to](https://dev.to/kanzitelli/expo-react-native-navigation-1pll)
 - cli-rn — making RN app developing experience as smooth as possible - [Medium](https://kanzitelli.medium.com/cli-rn-making-rn-app-developing-experience-as-smooth-as-possible-1022aae3a0d3), [Dev.to](https://dev.to/kanzitelli/cli-rn-making-rn-app-developing-experience-as-smooth-as-possible-4e98)
 
-### Apps in production
+### Apps in production (from (rnn-starter)[https://github.com/kanzitelli/rnn-starter])
 
 - Wallpapers App - [Twitter](https://twitter.com/kanzitelli/status/1408192827155177472?s=20), App Store soon
 - Rabbit App. Lite Reddit client - [Github](https://github.com/kanzitelli/rabbit-app), [App Store](https://apps.apple.com/ru/app/rabbit-app-lite-reddit-client/id1535084154), [Google Play](https://play.google.com/store/apps/details?id=io.batyr.rabbitapp)
