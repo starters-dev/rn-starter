@@ -55,7 +55,8 @@ If you need to rename the app, do the following (based on [react-native-rename](
 
 ## What's inside
 
-- [React Navigation (v6)](https://github.com/react-navigation/react-navigation) - routing and navigation for React Native apps. If you'd like to use [React Native Navigation](https://github.com/wix/react-native-navigation) by Wix, check out [rnn-starter](https://github.com/kanzitelli/rnn-starter).
+- [React Navigation (v6)](https://github.com/react-navigation/react-navigation) - routing and navigation for React Native apps (with [Native Stack](https://reactnavigation.org/docs/native-stack-navigator/)). If you'd like to use [React Native Navigation](https://github.com/wix/react-native-navigation) by Wix, check out [rnn-starter](https://github.com/kanzitelli/rnn-starter).
+- [React Native Screens](https://github.com/software-mansion/react-native-screens) - Native navigation primitives for React Native app
 - [RN UI lib](https://github.com/wix/react-native-ui-lib) - amazing Design System, UI toolset & components library for React Native. Dark Mode is implemented using this library.
 - [Reanimated 2](https://github.com/software-mansion/react-native-reanimated) - React Native's Animated library reimplemented.
 - [MobX](https://github.com/mobxjs/mobx) - simple, scalable state management, with [mobx-persist-store](https://github.com/quarrant/mobx-persist-store) for persisting your stores.
