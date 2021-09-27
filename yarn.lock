@@ -1011,10 +1011,10 @@
     "@types/yargs" "^16.0.0"
     chalk "^4.0.0"
 
-"@kanzitelli/if-component@^0.1.0":
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/@kanzitelli/if-component/-/if-component-0.1.0.tgz#084fecfc44c57b3706bd9246a7b1abceee1d9dcc"
-  integrity sha512-zTYYJ5jlPWyHr57Mfw9EhCXDf0NRrn1vK8TTVwYMVhQqZ07CQi8OdLfIixYmKtCG20QWyhzl1+a6KIarlo2beA==
+"@kanzitelli/if-component@^0.1.1":
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/@kanzitelli/if-component/-/if-component-0.1.1.tgz#6a3197862d86bb4f333facfa1168760981894964"
+  integrity sha512-/3TSvqDRHRlLEOpNeltNUdyXgQngsKBLi/s5PMkLNSznbDLcc4KfEE6Hs0cNA6OgYTEu5PSiuPW/fZiz1SI50g==
 
 "@nodelib/fs.scandir@2.1.5":
   version "2.1.5"
@@ -7278,6 +7278,11 @@ rimraf@~2.6.2:
   integrity sha512-mwqeW5XsA2qAejG46gYdENaxXjx9onRNCfn7L0duuP4hCuTIi/QO7PDK07KJfp1d+izWPrzEJDcSqBa0OZQriA==
   dependencies:
     glob "^7.1.3"
+
+rn-bounceable@^0.0.5:
+  version "0.0.5"
+  resolved "https://registry.yarnpkg.com/rn-bounceable/-/rn-bounceable-0.0.5.tgz#e6bec75710696dd301526b0a8db1f4d357c4a6f2"
+  integrity sha512-sYPWfbCotlHt88JGwBUUuy6e//feD7xS36QQu5dses43lhC6Kz//22WxZc585kUbXwTWulN1++Wzd43RR1Ir2A==
 
 rsvp@^4.8.4:
   version "4.8.5"
