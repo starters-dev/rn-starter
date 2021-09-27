@@ -40,7 +40,7 @@ export const Example: React.FC<Props> = observer(({route}) => {
               <Button
                 marginV-s1
                 label={t.do('section.navigation.button.sharedTransition')}
-                onPress={() => Alert.alert('future feature: shared transition')}
+                onPress={() => nav.push('ExampleShared')}
               />
             </View>
 
