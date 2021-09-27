@@ -1,7 +1,9 @@
 import React, {useCallback} from 'react';
-import {ScrollView, Alert} from 'react-native';
+import {ScrollView, Alert, ActivityIndicator} from 'react-native';
+import {useFocusEffect} from '@react-navigation/core';
 import {View, Button, Text} from 'react-native-ui-lib';
 import {observer} from 'mobx-react';
+import {If} from '@kanzitelli/if-component';
 
 import {useServices} from '../services';
 import {useStores} from '../stores';
@@ -9,7 +11,6 @@ import {useStores} from '../stores';
 import {Section} from '../components/section';
 import {Reanimated2} from '../components/reanimated2';
 import {randomNum} from '../utils/help';
-import {useFocusEffect} from '@react-navigation/core';
 
 export const Main: React.FC = observer(({}) => {
   const {nav, t, api} = useServices();
@@ -65,7 +66,12 @@ export const Main: React.FC = observer(({}) => {
                 App launches: {ui.appLaunches}
               </Text>
               <Text marginB-s2 text60R textColor>
-                Counter: {counter.loading ? 'Loading...' : counter.value}
+                Counter:{' '}
+                <If
+                  _={counter.loading}
+                  _then={() => <ActivityIndicator />}
+                  _else={<Text>{counter.value}</Text>}
+                />
               </Text>
               <Button margin-s1 label="-" onPress={counter.dec} />
               <Button margin-s1 label="+" onPress={counter.inc} />

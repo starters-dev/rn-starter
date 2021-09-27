@@ -3,11 +3,13 @@ import {NativeStackNavigationOptions} from '@react-navigation/native-stack';
 
 import {Modal, Screen, Tabs} from '../../screens';
 
-type ScreenInfo = {
+type BaseScreenInfo = {
   name: string;
-  // component: React.FC<NativeStackScreenProps<ScreenProps, Screen>>; // idk why it doesn't work
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   component: React.FC<any>;
+  // component: React.FC<NativeStackScreenProps<ScreenProps, Screen>>; // idk why it doesn't work
+};
+
+type ScreenInfo = BaseScreenInfo & {
   options: () => NativeStackNavigationOptions;
 };
 export type ScreenLayouts = {
@@ -15,7 +17,7 @@ export type ScreenLayouts = {
 };
 export type GenStackNavigatorProps = ScreenInfo[];
 
-export type TabScreenInfo = ScreenInfo & {
+export type TabScreenInfo = BaseScreenInfo & {
   options: () => BottomTabNavigationOptions;
 };
 export type TabScreenLayouts = {
