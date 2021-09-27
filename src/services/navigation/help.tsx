@@ -14,7 +14,7 @@ export const genStackNavigator = (screens: GenStackNavigatorProps): JSX.Element 
       key={it.name}
       name={it.name}
       component={it.component}
-      options={merge(screenDefaultOptions(), it.options)}
+      options={merge(screenDefaultOptions(), it.options())}
     />
   ));
 
@@ -27,7 +27,7 @@ export const genTabNavigator = (screens: GenTabNavigatorProps): JSX.Element => {
 
   const Tab = createBottomTabNavigator();
   const tabScreens = screens.map(it => (
-    <Tab.Screen key={it.name} name={it.name} component={it.component} options={it.options} />
+    <Tab.Screen key={it.name} name={it.name} component={it.component} options={it.options()} />
   ));
 
   return (
