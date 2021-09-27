@@ -2,7 +2,7 @@ import React from 'react';
 import {View, Text} from 'react-native-ui-lib';
 import Animated, {withSpring, useAnimatedStyle, useSharedValue} from 'react-native-reanimated';
 
-import {Bounceable} from './bounceable';
+import {Bounceable} from 'rn-bounceable';
 
 type Reanimated2Props = {
   stID?: string;

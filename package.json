@@ -23,7 +23,7 @@
     "postinstall": "patch-package"
   },
   "dependencies": {
-    "@kanzitelli/if-component": "^0.1.0",
+    "@kanzitelli/if-component": "^0.1.1",
     "@react-native-async-storage/async-storage": "^1.15.8",
     "@react-native-community/blur": "^3.6.0",
     "@react-native-community/datetimepicker": "^3.5.2",
@@ -50,7 +50,8 @@
     "react-native-safe-area-context": "^3.3.2",
     "react-native-screens": "^3.7.2",
     "react-native-ui-lib": "^6.0.0",
-    "react-native-vector-icons": "^8.1.0"
+    "react-native-vector-icons": "^8.1.0",
+    "rn-bounceable": "^0.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
