@@ -51,7 +51,7 @@ export const Main: React.FC = observer(({}) => {
             <Button
               marginV-s1
               label={t.do('section.navigation.button.sharedTransition')}
-              onPress={() => Alert.alert('future feature: shared transition')}
+              onPress={() => nav.push('ExampleShared')}
             />
           </Section>
 
