@@ -9,20 +9,20 @@ For more information, check out [Why](#why) section.
 #### Quick start with [cli-rn](https://github.com/kanzitelli/cli-rn)
 
 ```bash
-> npm i -g cli-rn
-> cli-rn new AppName -n rn
+> npx cli-rn new App -t rn
 ```
 
 If you encounter any problems with `cli-rn`, please open an issue [here](https://github.com/kanzitelli/cli-rn/issues).
 
 If you have any troubles running the app with `yarn ios` or `yarn android`, open XCode or Android Studio and run the project from there.
 
-#### Manual setup
+<details>
+<summary>Manual setup</summary>
 
 1. Clone the repo
 
 ```bash
-> git clone https://github.com/kanzitelli/rn-starter.git AppName && cd AppName
+> git clone https://github.com/kanzitelli/rn-starter.git App && cd App
 ```
 
 2. Remove `.git` file (if not planning to contribute)
@@ -52,6 +52,8 @@ If you need to rename the app, do the following (based on [react-native-rename](
 > yarn rename NewAppName
 > yarn ios:pods
 ```
+
+</details>
 
 ## What's inside
 
@@ -161,7 +163,7 @@ There are still some things I would like to add to the starter:
 
 - [ ] Auth flow
 - [ ] Fast Image — [DylanVann/react-native-fast-image](https://github.com/DylanVann/react-native-fast-image)
-- [ ] Notifications — [wix/react-native-notifications](https://github.com/wix/react-native-notifications)
+- [ ] Notifications — [wix/react-native-notifications](https://github.com/wix/react-native-notifications) or/and [invertase/notifee](https://github.com/invertase/notifee)
 - [ ] E2E tests — [wix/Detox](https://github.com/wix/Detox)
 - [ ] Permissions — [zoontek/react-native-permissions](https://github.com/zoontek/react-native-permissions)
 - [ ] FB SDK — [thebergamo/react-native-fbsdk-next](https://github.com/thebergamo/react-native-fbsdk-next)
@@ -176,6 +178,11 @@ Feel free to open an issue for suggestions.
 - _Over-The-Air Updates_. They have been removed from the current version as I had some problems publishing one of the apps to AppStore. Check out [my tweet](https://twitter.com/kanzitelli/status/1398229619862642692) and be aware of the issue if you'd like to use them anyways.
 
 ## Worth checking
+
+### Other starters
+
+- [expo-starter](https://github.com/kanzitelli/rn-starter) - 🦥 Production-ready starter for Expo (React Native) App! Powered by cli-rn, React Navigation (v6), RN UI lib, Mobx, Reanimated 2, Dark Mode, Localization, and much more.
+- [rnn-starter](https://github.com/kanzitelli/rnn-starter) - 🤹 Production-ready starter for your next React Native App! Powered by cli-rn, React Native Navigation, RN UI lib, Mobx, Reanimated 2, Dark Mode, Localization, Notifications, Permissions, and much more.
 
 ### Articles
 
