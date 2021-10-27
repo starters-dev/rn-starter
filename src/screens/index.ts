@@ -4,6 +4,7 @@ import {Main} from './main';
 import {Settings} from './settings';
 import {Example} from './screen-sample';
 import {genRootNavigator, genStackNavigator, genTabNavigator} from '../services/navigation/help';
+import {services} from '../services';
 
 // Describe your screens here
 export type Tabs = 'Main' | 'WIP' | 'Settings';
@@ -19,13 +20,15 @@ export type ScreenProps = {
   Settings: undefined;
 } & ModalProps;
 
+const {t} = services;
+
 // Screens
 const screens: ScreenLayouts = {
   Main: {
     name: 'Main',
     component: Main,
     options: () => ({
-      title: 'Home',
+      title: t.do('home.title'),
     }),
   },
   Example: {
@@ -54,7 +57,7 @@ const tabs: TabScreenLayouts = {
     name: 'MainNavigator',
     component: HomeStack,
     options: () => ({
-      title: 'Home',
+      title: t.do('home.title'),
     }),
   },
   WIP: {
