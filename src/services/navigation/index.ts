@@ -1,6 +1,4 @@
-// import {Constants, Navigation, NavigationConstants, Options} from 'react-native-navigation';
 import React from 'react';
-import RNRestart from 'react-native-restart';
 
 import {ModalProps, ScreenProps} from '../../screens';
 import {CommonActions, NavigationContainerRef, StackActions} from '@react-navigation/native';
@@ -36,10 +34,6 @@ export class Nav implements IService {
     }
 
     this.r = currentName;
-  };
-
-  restart = (): void => {
-    RNRestart.Restart();
   };
 
   // Navigation methods
