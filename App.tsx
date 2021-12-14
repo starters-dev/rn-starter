@@ -1,4 +1,5 @@
 import React, {useCallback, useEffect, useState} from 'react';
+import {GestureHandlerRootView} from 'react-native-gesture-handler';
 
 import {AppNavigator} from './src/app';
 import {configureDesignSystem} from './src/utils/designSystem';
@@ -21,8 +22,10 @@ export default (): JSX.Element => {
   }, [startApp]);
 
   return (
-    <StoresProvider>
-      <StoresProvider>{ready ? <AppNavigator /> : null}</StoresProvider>
-    </StoresProvider>
+    <GestureHandlerRootView style={{flex: 1}}>
+      <StoresProvider>
+        <StoresProvider>{ready ? <AppNavigator /> : null}</StoresProvider>
+      </StoresProvider>
+    </GestureHandlerRootView>
   );
 };

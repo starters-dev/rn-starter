@@ -16,10 +16,6 @@ export const Main: React.FC = observer(({}) => {
   const {nav, t, api} = useServices();
   const {counter, ui} = useStores();
 
-  // useNavigationButtonPress(counter.inc, componentId, 'inc');
-  // useNavigationButtonPress(counter.dec, componentId, 'dec');
-  // useNavigationButtonPress(() => nav.push(componentId, 'Settings'), componentId, 'settings');
-
   const start = useCallback(async () => {
     try {
       await api.counter.get();
