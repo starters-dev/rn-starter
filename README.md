@@ -80,7 +80,8 @@ If you need to rename the app, do the following (based on [react-native-rename](
 - `onStart` - a service where you can write your own logic when app is launched. For example, you can increment number of `appLaunches` there.
 - `configureDesignSystem()` - a method where all settings for an app's design system is taking place. You can customize there colors, schemes, typegraphy, spacings, etc.
 
-https://user-images.githubusercontent.com/4402166/134559538-a2801d52-7b8a-44a6-b12a-0cc1eafbb82b.MP4
+https://user-images.githubusercontent.com/4402166/148631148-7f6e88aa-7516-4343-a812-bebc64d24102.MP4
+
 
 ## Advantages
 
