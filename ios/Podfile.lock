@@ -295,10 +295,10 @@ PODS:
     - glog
   - react-native-blur (0.8.0):
     - React
-  - react-native-mmkv (1.5.4):
+  - react-native-mmkv (1.6.2):
     - MMKV
     - React-Core
-  - react-native-restart (0.0.22):
+  - react-native-restart (0.0.23):
     - React-Core
   - react-native-safe-area-context (3.3.2):
     - React-Core
@@ -371,13 +371,9 @@ PODS:
     - React
   - RNCAsyncStorage (1.15.14):
     - React-Core
-  - RNDeviceInfo (8.4.8):
-    - React-Core
   - RNGestureHandler (2.1.0):
     - React-Core
-  - RNLocalize (2.1.6):
-    - React-Core
-  - RNReanimated (2.3.0):
+  - RNReanimated (2.3.1):
     - DoubleConversion
     - FBLazyVector
     - FBReactNativeSpec
@@ -476,9 +472,7 @@ DEPENDENCIES:
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
   - ReactNativeUiLib (from `../node_modules/react-native-ui-lib/lib`)
   - "RNCAsyncStorage (from `../node_modules/@react-native-async-storage/async-storage`)"
-  - RNDeviceInfo (from `../node_modules/react-native-device-info`)
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
-  - RNLocalize (from `../node_modules/react-native-localize`)
   - RNReanimated (from `../node_modules/react-native-reanimated`)
   - RNScreens (from `../node_modules/react-native-screens`)
   - RNVectorIcons (from `../node_modules/react-native-vector-icons`)
@@ -577,12 +571,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-ui-lib/lib"
   RNCAsyncStorage:
     :path: "../node_modules/@react-native-async-storage/async-storage"
-  RNDeviceInfo:
-    :path: "../node_modules/react-native-device-info"
   RNGestureHandler:
     :path: "../node_modules/react-native-gesture-handler"
-  RNLocalize:
-    :path: "../node_modules/react-native-localize"
   RNReanimated:
     :path: "../node_modules/react-native-reanimated"
   RNScreens:
@@ -628,8 +618,8 @@ SPEC CHECKSUMS:
   React-jsinspector: d0374f7509d407d2264168b6d0fad0b54e300b85
   React-logger: 933f80c97c633ee8965d609876848148e3fef438
   react-native-blur: cad4d93b364f91e7b7931b3fa935455487e5c33c
-  react-native-mmkv: 01fb2fcc0853b25607bd35c9ce132e73756df52b
-  react-native-restart: 733a51ad137f15b0f8dc34c4082e55af7da00979
+  react-native-mmkv: c5adce7da6e16b9ea875180a4c9a6be958ae8a81
+  react-native-restart: aaad36f3ed7031daac3565f4a79d67e4f3884a50
   react-native-safe-area-context: 584dc04881deb49474363f3be89e4ca0e854c057
   React-perflogger: 93075d8931c32cd1fce8a98c15d2d5ccc4d891bd
   React-RCTActionSheet: 7d3041e6761b4f3044a37079ddcb156575fb6d89
@@ -645,10 +635,8 @@ SPEC CHECKSUMS:
   ReactCommon: 57b69f6383eafcbd7da625bfa6003810332313c4
   ReactNativeUiLib: cde7263a7d308b60161cd286f95c9433e79f2f7d
   RNCAsyncStorage: ea6b5c280997b2b32a587793163b1f10e580c4f7
-  RNDeviceInfo: 0400a6d0c94186d1120c3cbd97b23abc022187a9
   RNGestureHandler: e5c7cab5f214503dcefd6b2b0cefb050e1f51c4a
-  RNLocalize: f10d91c76a5692d4cf6f218c70f6e4d7dcb42d1c
-  RNReanimated: 569c269480a76e39196aa17a5df08ef1561db5ff
+  RNReanimated: da3860204e5660c0dd66739936732197d359d753
   RNScreens: 522705f2e5c9d27efb17f24aceb2bf8335bc7b8e
   RNVectorIcons: 4143ba35feebab8fdbe6bc43d1e776b393d47ac8
   Yoga: e7dc4e71caba6472ff48ad7d234389b91dadc280
