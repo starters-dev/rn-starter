@@ -58,6 +58,7 @@ If you need to rename the app, do the following (based on [react-native-rename](
 ## What's inside
 
 - [React Navigation (v6)](https://github.com/react-navigation/react-navigation) - routing and navigation for React Native apps. If you'd like to use [React Native Navigation](https://github.com/wix/react-native-navigation) by Wix, check out [rnn-starter](https://github.com/kanzitelli/rnn-starter).
+- [Expo Modules](https://github.com/expo/expo) - libraries and modules from [Expo](https://expo.dev) ecosystem.
 - [RN UI lib](https://github.com/wix/react-native-ui-lib) - amazing Design System, UI toolset & components library for React Native. Dark Mode is implemented using this library.
 - [Reanimated 2](https://github.com/software-mansion/react-native-reanimated) - React Native's Animated library reimplemented.
 - [MobX](https://github.com/mobxjs/mobx) - simple, scalable state management, with [mobx-persist-store](https://github.com/quarrant/mobx-persist-store) for persisting your stores.
@@ -66,7 +67,6 @@ If you need to rename the app, do the following (based on [react-native-rename](
 #### Extra helpful libraries
 
 - [React Native Gesture Handler](https://github.com/kmagiera/react-native-gesture-handler) - native touches and gesture system for React Native.
-- [React Native Device Info](https://github.com/react-native-community/react-native-device-info) - device information for React Native iOS and Android.
 - [Hermes Engine](https://reactnative.dev/docs/hermes) - a JavaScript engine optimized for running React Native apps.
 - [ESLint](https://github.com/eslint/eslint) + [Prettier](https://github.com/prettier/prettier) - keep your code neat and structured.
 - [Patch Package](https://github.com/ds300/patch-package) - useful for fixing node modules instantly.
@@ -76,11 +76,12 @@ If you need to rename the app, do the following (based on [react-native-rename](
 #### Useful services/methods
 
 - `navigation` - a service where all navigation configuration takes place in. It simplifies and abstracts the process of registering screens, layouts, etc.
-- `translate` - a service that brings easy integration of localization for an app by using [i18n-js](https://github.com/fnando/i18n-js) and [react-native-localize](https://github.com/zoontek/react-native-localize). You can see an example of `en` and `ru` localizations in `Example` screen.
+- `translate` - a service that brings an easy integration of localization for an app by using [i18n-js](https://github.com/fnando/i18n-js) and [expo-localization](https://github.com/expo/expo/tree/master/packages/expo-localization). You can see an example of `en` and `ru` localizations in `Example` screen.
 - `onStart` - a service where you can write your own logic when app is launched. For example, you can increment number of `appLaunches` there.
 - `configureDesignSystem()` - a method where all settings for an app's design system is taking place. You can customize there colors, schemes, typegraphy, spacings, etc.
 
-https://user-images.githubusercontent.com/4402166/134559538-a2801d52-7b8a-44a6-b12a-0cc1eafbb82b.MP4
+https://user-images.githubusercontent.com/4402166/148631148-7f6e88aa-7516-4343-a812-bebc64d24102.MP4
+
 
 ## Advantages
 
@@ -120,13 +121,22 @@ const tabs: TabScreenLayouts = {
 Stack Navigator:
 
 ```
-const HomeStack = () => genStackNavigator([screens.Main, screens.Example]);
+const HomeStack = () =>
+  genStackNavigator([
+    screens.Main,
+    screens.Example,
+  ]);
 ```
 
 Tab Navigator:
 
 ```
-const TabNavigator = () => genTabNavigator([tabs.Main, tabs.WIP, tabs.Settings]);
+const TabNavigator = () =>
+  genTabNavigator([
+    tabs.Main,
+    tabs.WIP,
+    tabs.Settings,
+  ]);
 ```
 
 #### Navigate to other screens with predictability
