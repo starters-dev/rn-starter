@@ -3,7 +3,7 @@ import React from 'react';
 import {ModalProps, ScreenProps} from '../../screens';
 import {CommonActions, NavigationContainerRef, StackActions} from '@react-navigation/native';
 
-export class Nav implements IService {
+export class NavService implements IService {
   private inited = false;
 
   n: React.RefObject<NavigationContainerRef<ScreenProps>> = React.createRef();
