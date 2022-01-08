@@ -1,6 +1,6 @@
 import React from 'react';
 import {Alert, ScrollView} from 'react-native';
-import {View, Button, Text} from 'react-native-ui-lib';
+import {View, Text} from 'react-native-ui-lib';
 import {observer} from 'mobx-react';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 
@@ -12,6 +12,7 @@ import {useServices} from '../services';
 import {Section} from '../components/section';
 import {randomNum} from '../utils/help';
 import {Reanimated2} from '../components/reanimated2';
+import {BButton} from '../components/button';
 
 type Props = NativeStackScreenProps<ScreenProps, 'Example'>;
 
@@ -27,17 +28,17 @@ export const Example: React.FC<Props> = observer(({route}) => {
         <View padding-s4>
           <Section title={t.do('section.navigation.title')}>
             <View>
-              <Button
+              <BButton
                 marginV-s1
                 label={t.do('section.navigation.button.push')}
                 onPress={() => nav.push('Example', {value: randomNum()})}
               />
-              <Button
+              <BButton
                 marginV-s1
                 label={t.do('section.navigation.button.show')}
                 onPress={() => nav.show('ExampleModal')}
               />
-              <Button
+              <BButton
                 marginV-s1
                 label={t.do('section.navigation.button.sharedTransition')}
                 onPress={() => Alert.alert('future feature: shared transition')}
@@ -52,7 +53,7 @@ export const Example: React.FC<Props> = observer(({route}) => {
           </Section>
 
           <Reanimated2 stID="reanimated2" />
-          <Button marginV-s1 label={t.do('section.navigation.button.back')} onPress={nav.pop} />
+          <BButton marginV-s1 label={t.do('section.navigation.button.back')} onPress={nav.pop} />
 
           <Text textColor center>
             localized with i18n-js
