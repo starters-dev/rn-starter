@@ -2,7 +2,7 @@ import React, {useMemo} from 'react';
 import {Alert, Linking, ScrollView} from 'react-native';
 import {View, ActionSheet, Text} from 'react-native-ui-lib';
 import {observer, useLocalObservable} from 'mobx-react';
-import {getApplicationName, getVersion} from 'react-native-device-info';
+import * as Application from 'expo-application';
 
 import {useConstants} from '../utils/constants';
 import {useStores} from '../stores';
@@ -156,8 +156,16 @@ export const Settings: React.FC = observer(() => {
 
           <Section bg title="About">
             <View>
-              <Action disabled title="App name" info={getApplicationName()} />
-              <Action disabled title="Version" info={getVersion()} />
+              <Action
+                disabled
+                title="App name"
+                info={Application.applicationName ?? 'No app name'}
+              />
+              <Action
+                disabled
+                title="Version"
+                info={Application.nativeApplicationVersion ?? '0.0'}
+              />
             </View>
           </Section>
         </View>

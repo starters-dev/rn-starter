@@ -4,6 +4,8 @@ import {useFocusEffect} from '@react-navigation/core';
 import {View, Button, Text} from 'react-native-ui-lib';
 import {observer} from 'mobx-react';
 import {If} from '@kanzitelli/if-component';
+import Constants from 'expo-constants';
+import * as Application from 'expo-application';
 
 import {useServices} from '../services';
 import {useStores} from '../stores';
@@ -50,6 +52,15 @@ export const Main: React.FC = observer(({}) => {
               label={t.do('section.navigation.button.sharedTransition')}
               onPress={() => Alert.alert('future feature: shared transition')}
             />
+          </Section>
+
+          <Section title="Expo">
+            <Text marginB-s2 text60R textColor>
+              Session Id: {Constants.sessionId}
+            </Text>
+            <Text marginB-s2 text60R textColor>
+              App name: {Application.applicationName}
+            </Text>
           </Section>
 
           <Section title="Reanimated 2">
