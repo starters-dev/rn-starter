@@ -1,6 +1,6 @@
 {
   "name": "rn-starter",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "description": "Production-ready starter for your next React Native App! Powered by cli-rn, React Navigation (v6), Expo Modules, RN UI lib, Mobx, Reanimated 2, Dark Mode, Localization, Notifications, Permissions, and much more.",
   "author": "Batyr <dev@batyr.io> (https://github.com/kanzitelli)",
   "homepage": "https://github.com/kanzitelli/rn-starter",
