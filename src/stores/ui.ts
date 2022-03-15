@@ -1,6 +1,5 @@
 import {makeAutoObservable} from 'mobx';
 import {hydrateStore, makePersistable} from 'mobx-persist-store';
-import {services} from '../services';
 import {restartApp} from '../utils/help';
 
 export class UIStore implements IStore {
