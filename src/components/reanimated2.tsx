@@ -8,7 +8,7 @@ type Reanimated2Props = {
   stID?: string;
 };
 
-export const Reanimated2: React.FC<Reanimated2Props> = ({stID}: Reanimated2Props) => {
+export const Reanimated2: React.FC<Reanimated2Props> = ({}: Reanimated2Props) => {
   const offset = useSharedValue(0);
 
   const animatedStyles = useAnimatedStyle(() => ({

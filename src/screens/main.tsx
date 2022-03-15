@@ -75,11 +75,7 @@ export const Main: React.FC = observer(({}) => {
               </Text>
               <Text marginB-s2 text60R textColor>
                 Counter:{' '}
-                <If
-                  _={counter.loading}
-                  _then={() => <ActivityIndicator />}
-                  _else={<Text>{counter.value}</Text>}
-                />
+                <If _={counter.loading} _then={() => <ActivityIndicator />} _else={<Text>{counter.value}</Text>} />
               </Text>
               <BButton margin-s1 label="-" onPress={counter.dec} />
               <BButton margin-s1 label="+" onPress={counter.inc} />

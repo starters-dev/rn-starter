@@ -26,9 +26,7 @@ export const tabBarDefaultOptions = (routeName: string): BottomTabNavigationOpti
   tabBarActiveTintColor: Colors.primary,
   tabBarInactiveTintColor: Colors.grey40,
   tabBarStyle: {backgroundColor: Colors.bgColor, borderTopWidth: 0, elevation: 0},
-  tabBarIcon: ({focused, color, size}) => (
-    <Icon name={getIconName(routeName, focused)} size={size} color={color} />
-  ),
+  tabBarIcon: ({focused, color, size}) => <Icon name={getIconName(routeName, focused)} size={size} color={color} />,
 });
 
 const getIconName = (routeName: string, focused: boolean): string => {
