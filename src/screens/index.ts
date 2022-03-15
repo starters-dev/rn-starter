@@ -89,5 +89,4 @@ const modals: ModalScreenLayouts = {
 };
 
 // Root Navigator
-export const RootNavigator = (): JSX.Element =>
-  genRootNavigator(TabNavigator, [modals.ExampleModal]);
+export const RootNavigator = (): JSX.Element => genRootNavigator(TabNavigator, [modals.ExampleModal]);

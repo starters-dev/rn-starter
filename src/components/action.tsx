@@ -12,14 +12,7 @@ type ActionProps = {
   onPress?: () => void;
 };
 
-export const Action: React.FC<ActionProps> = ({
-  title,
-  icon,
-  rightIcon,
-  info,
-  disabled,
-  onPress,
-}: ActionProps) => {
+export const Action: React.FC<ActionProps> = ({title, icon, rightIcon, info, disabled, onPress}: ActionProps) => {
   const b = {disabled, onPress};
   const iconSize = 22;
 

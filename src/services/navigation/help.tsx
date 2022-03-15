@@ -47,9 +47,7 @@ export const genTabNavigator = (screens: GenTabNavigatorProps): JSX.Element => {
 export const genRootNavigator = (app: React.FC, modals: ModalScreenInfo[]): JSX.Element => {
   const RootStack = createNativeStackNavigator();
   const appScreen = <RootStack.Screen name="App" component={app} />;
-  const modalScreens = modals.map(m => (
-    <RootStack.Screen key={m.name} name={m.name} component={m.component} />
-  ));
+  const modalScreens = modals.map(m => <RootStack.Screen key={m.name} name={m.name} component={m.component} />);
 
   return (
     <RootStack.Navigator screenOptions={{headerShown: false}}>
